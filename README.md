@@ -116,7 +116,7 @@ Go to **Libraries → [your library] → Options → Flow Variables** and add:
 ## Known Limitations
 
 - **Intel-only.** This flow uses `av1_vaapi` and will fail on nodes without Intel GPU VAAPI support. There is no AMD or NVIDIA fallback — the flow will explicitly fail if `av1_vaapi` is not detected.
-- **No QSV support.** Intel Battlemage (Arc B-series) does not support QSV for AV1. VAAPI is the correct path for this generation.
+- **No QSV support.** Intel Battlemage (Arc B-series) did not play well with QSV for AV1.
 - **DV Profile 5 and 7 are skipped.** These profiles cannot be safely transcoded to AV1 without specialized tooling beyond this flow's scope. Use nichols89ben's flow to handle those files first if needed.
 
 ---
