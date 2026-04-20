@@ -131,7 +131,7 @@
       "version": "1.0.0",
       "inputsDB": {
         "outputArguments": "-max_muxing_queue_size 1024 -pix_fmt p010le -color_primaries bt2020 -color_trc smpte2084 -colorspace bt2020nc -color_range tv -c:a copy -c:s copy",
-        "inputArguments": "-hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format vaapi"
+        "inputArguments": "-hwaccel vaapi -hwaccel_device {{args.variables.user.vaapiDevice}} -hwaccel_output_format vaapi"
       },
       "fpEnabled": true,
       "id": "ZE7xl2qZu",
@@ -147,7 +147,7 @@
       "version": "1.0.0",
       "inputsDB": {
         "variable": "tempFile",
-        "value": "false"
+        "value": "{{args.variables.user.isTest}}"
       },
       "fpEnabled": true,
       "id": "jeOBHYxfq",
@@ -222,7 +222,7 @@
       "version": "1.0.0",
       "inputsDB": {
         "outputArguments": "-max_muxing_queue_size 1024 -pix_fmt p010le -c:a copy -c:s copy",
-        "inputArguments": "-hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format vaapi"
+        "inputArguments": "-hwaccel vaapi -hwaccel_device {{args.variables.user.vaapiDevice}} -hwaccel_output_format vaapi"
       },
       "fpEnabled": true,
       "id": "2mA1B19I3",
@@ -291,7 +291,7 @@
         "outputCodec": "av1",
         "ffmpegPreset": "veryslow",
         "hardwareType": "vaapi",
-        "ffmpegQuality": "24",
+        "ffmpegQuality": "{{args.variables.user.av1Quality}}",
         "hardwareEncoding": "true",
         "hardwareDecoding": "false",
         "forceEncoding": "true",
