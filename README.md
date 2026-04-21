@@ -1,6 +1,6 @@
 # Tdarr AV1 VAAPI Flow
 
-<img width="841" height="841" alt="image" src="https://github.com/user-attachments/assets/6f05b181-d42f-41f9-b035-e0be1abb6791" />
+<img width="836" height="845" alt="image" src="https://github.com/user-attachments/assets/06dc64fe-61c1-4770-87c1-ee18d876cdac" />
 
 
 A Tdarr flow that transcodes video to AV1 using Intel GPU hardware encoding via VAAPI. Handles HDR10, HDR10+, and Dolby Vision (Profiles 4, 5, 7, and 8) correctly, skipping files that should not be processed.
