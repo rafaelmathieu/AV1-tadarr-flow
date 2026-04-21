@@ -5,6 +5,34 @@
   "tags": "",
   "flowPlugins": [
     {
+      "name": "Set The Device ID",
+      "sourceRepo": "Community",
+      "pluginName": "comment",
+      "version": "1.0.0",
+      "fpEnabled": true,
+      "id": "GGKVM3U4b",
+      "position": {
+        "x": 708,
+        "y": 300
+      }
+    },
+    {
+      "name": "Custom Arguments DeviceID",
+      "sourceRepo": "Community",
+      "pluginName": "ffmpegCommandCustomArguments",
+      "version": "1.0.0",
+      "inputsDB": {
+        "outputArguments": "",
+        "inputArguments": "-hwaccel_device /dev/dri/renderD128"
+      },
+      "fpEnabled": true,
+      "id": "Yl_6NIEqG",
+      "position": {
+        "x": 708,
+        "y": 336
+      }
+    },
+    {
       "name": "Check if video has HDR Fallback",
       "sourceRepo": "Community",
       "pluginName": "comment",
@@ -131,7 +159,7 @@
       "version": "1.0.0",
       "inputsDB": {
         "outputArguments": "-max_muxing_queue_size 1024 -pix_fmt p010le -color_primaries bt2020 -color_trc smpte2084 -colorspace bt2020nc -color_range tv -c:a copy -c:s copy",
-        "inputArguments": "-hwaccel vaapi -hwaccel_device {{args.variables.user.vaapiDevice}} -hwaccel_output_format vaapi"
+        "inputArguments": "-hwaccel vaapi  -hwaccel_output_format vaapi"
       },
       "fpEnabled": true,
       "id": "ZE7xl2qZu",
@@ -141,28 +169,12 @@
       }
     },
     {
-      "name": "Is it a Test?",
-      "sourceRepo": "Community",
-      "pluginName": "setFlowVariable",
-      "version": "1.0.0",
-      "inputsDB": {
-        "variable": "tempFile",
-        "value": "{{args.variables.user.isTest}}"
-      },
-      "fpEnabled": true,
-      "id": "jeOBHYxfq",
-      "position": {
-        "x": 276,
-        "y": -252
-      }
-    },
-    {
       "name": "Skip File Size Check?",
       "sourceRepo": "Community",
       "pluginName": "checkFlowVariable",
       "version": "1.0.0",
       "inputsDB": {
-        "variable": "{{args.variables.user.checkFileSize}}",
+        "variable": "{{args.userVariables.library.checkFileSize}}",
         "value": "false"
       },
       "fpEnabled": true,
@@ -197,7 +209,7 @@
       "id": "gYh9447IH",
       "position": {
         "x": 936,
-        "y": 276
+        "y": 204
       }
     },
     {
@@ -211,8 +223,8 @@
       "fpEnabled": true,
       "id": "l0b40YBa-",
       "position": {
-        "x": 708,
-        "y": 240
+        "x": 636,
+        "y": 168
       }
     },
     {
@@ -222,7 +234,7 @@
       "version": "1.0.0",
       "inputsDB": {
         "outputArguments": "-max_muxing_queue_size 1024 -pix_fmt p010le -c:a copy -c:s copy",
-        "inputArguments": "-hwaccel vaapi -hwaccel_device {{args.variables.user.vaapiDevice}} -hwaccel_output_format vaapi"
+        "inputArguments": "-hwaccel vaapi  -hwaccel_output_format vaapi"
       },
       "fpEnabled": true,
       "id": "2mA1B19I3",
@@ -240,7 +252,7 @@
       "id": "y4lqcdrho",
       "position": {
         "x": 276,
-        "y": -312
+        "y": -252
       }
     },
     {
@@ -267,7 +279,7 @@
       "id": "6a0HyfVUa",
       "position": {
         "x": 636,
-        "y": 144
+        "y": 72
       }
     },
     {
@@ -291,7 +303,7 @@
         "outputCodec": "av1",
         "ffmpegPreset": "veryslow",
         "hardwareType": "vaapi",
-        "ffmpegQuality": "{{args.variables.user.av1Quality}}",
+        "ffmpegQuality": "{{args.userVariables.library.av1Quality}}",
         "hardwareEncoding": "true",
         "hardwareDecoding": "false",
         "forceEncoding": "true",
@@ -302,7 +314,7 @@
       "id": "nvhiecc42",
       "position": {
         "x": 708,
-        "y": 312
+        "y": 240
       }
     },
     {
@@ -426,12 +438,12 @@
       }
     },
     {
-      "name": "Check tempFile",
+      "name": "is it a test?",
       "sourceRepo": "Community",
       "pluginName": "checkFlowVariable",
       "version": "1.0.0",
       "inputsDB": {
-        "variable": "tempFile",
+        "variable": "{{args.userVariables.library.isTest}}",
         "value": "true"
       },
       "fpEnabled": true,
@@ -448,7 +460,7 @@
       "version": "2.0.0",
       "inputsDB": {
         "keepRelativePath": "false",
-        "outputDirectory": "{{args.variables.user.testDirectory}}"
+        "outputDirectory": "/mnt/media/temp"
       },
       "fpEnabled": true,
       "id": "iqbbufUK8",
@@ -502,7 +514,7 @@
       "id": "7YluZ5Isj",
       "position": {
         "x": 708,
-        "y": 384
+        "y": 420
       }
     },
     {
@@ -520,18 +532,6 @@
       "position": {
         "x": 276,
         "y": -180
-      }
-    },
-    {
-      "name": "Check if this is a Test run",
-      "sourceRepo": "Community",
-      "pluginName": "comment",
-      "version": "1.0.0",
-      "fpEnabled": true,
-      "id": "72gvQY8Xt",
-      "position": {
-        "x": 276,
-        "y": -276
       }
     }
   ],
@@ -656,13 +656,6 @@
       "id": "ByG58lWSF"
     },
     {
-      "source": "nvhiecc42",
-      "sourceHandle": "1",
-      "target": "7YluZ5Isj",
-      "targetHandle": null,
-      "id": "GTu_G3IUM"
-    },
-    {
       "source": "ZE7xl2qZu",
       "sourceHandle": "1",
       "target": "5sziHU00e",
@@ -675,13 +668,6 @@
       "target": "ZE7xl2qZu",
       "targetHandle": null,
       "id": "07yOxbmOd"
-    },
-    {
-      "source": "7YluZ5Isj",
-      "sourceHandle": "4",
-      "target": "2mA1B19I3",
-      "targetHandle": null,
-      "id": "bp9XvEIHe"
     },
     {
       "source": "7YluZ5Isj",
@@ -717,27 +703,6 @@
       "target": "Hy3PLTH5c",
       "targetHandle": null,
       "id": "qlvWz0aaR"
-    },
-    {
-      "source": "y4lqcdrho",
-      "sourceHandle": "1",
-      "target": "72gvQY8Xt",
-      "targetHandle": null,
-      "id": "cmeOvO4v5"
-    },
-    {
-      "source": "72gvQY8Xt",
-      "sourceHandle": "1",
-      "target": "jeOBHYxfq",
-      "targetHandle": null,
-      "id": "nuZH16XzB"
-    },
-    {
-      "source": "jeOBHYxfq",
-      "sourceHandle": "1",
-      "target": "F7InSH-Yi",
-      "targetHandle": null,
-      "id": "hDLVe6pc-"
     },
     {
       "source": "F7InSH-Yi",
@@ -892,6 +857,41 @@
       "target": "6a0HyfVUa",
       "targetHandle": null,
       "id": "IrzXCWZd2"
+    },
+    {
+      "source": "7YluZ5Isj",
+      "sourceHandle": "4",
+      "target": "2mA1B19I3",
+      "targetHandle": null,
+      "id": "lIE9idgUu"
+    },
+    {
+      "source": "Yl_6NIEqG",
+      "sourceHandle": "1",
+      "target": "7YluZ5Isj",
+      "targetHandle": null,
+      "id": "GGnd0x7ru"
+    },
+    {
+      "source": "nvhiecc42",
+      "sourceHandle": "1",
+      "target": "GGKVM3U4b",
+      "targetHandle": null,
+      "id": "wh1H_S3A4"
+    },
+    {
+      "source": "GGKVM3U4b",
+      "sourceHandle": "1",
+      "target": "Yl_6NIEqG",
+      "targetHandle": null,
+      "id": "ejRiyKUqt"
+    },
+    {
+      "source": "y4lqcdrho",
+      "sourceHandle": "1",
+      "target": "F7InSH-Yi",
+      "targetHandle": null,
+      "id": "v0kUIRK1Q"
     }
   ]
 }
